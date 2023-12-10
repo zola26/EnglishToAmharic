@@ -1,0 +1,129 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amharic Converter</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            /* Direct URL for the background image */
+            background: url('{% static "images/is.jpg" %}') no-repeat center center fixed;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .converter-block {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: rgba(255, 255, 255, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+            width: 100%; /* Full width */
+            text-align: center;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 0;
+        }
+
+        .logo-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin: 5px;
+        }
+
+        .logo {
+            max-width: 50%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .form-container {
+            display: flex;
+            justify-content: space-between;
+            width: 60%;
+            margin-top: 20px; /* Adjusted top margin */
+        }
+
+        form {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            margin-right: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            min-height: 250px;
+        }
+
+        button {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .result-container {
+            flex: 1;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        h2,
+        p {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    
+
+    <div class="converter-block">
+        <h1>Amharic using English characters</h1>
+    </div>
+
+    <div class="form-container">
+        <form action="/convert/" method="post"> <!-- Added trailing slash to action -->
+            {% csrf_token %}
+            <label for="english_text">Enter English Text:</label>
+            <textarea id="english_text" name="english_text" required></textarea>
+            <button type="submit">Convert</button>
+        </form>
+
+        {% if converted_text %}
+        <div class="result-container">
+            <h2>Converted Text:</h2>
+            <textarea readonly>{{ converted_text }}</textarea>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
+
