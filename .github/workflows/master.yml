@@ -1,7 +1,7 @@
 on: 
   push:
-    branches:
-      -master
+   branches:
+     - master
 name: 🚀 Deploy website on push
 jobs:
   web-deploy:
@@ -15,6 +15,6 @@ jobs:
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
         server: www.englishtoamharic.deboengineering.com
-        username: myFtpUserName
+        username: ${{ secrets.ftp_username }}
         password: ${{ secrets.ftp_password }}
         server-dir: /english_to_amharic_alphabate/
